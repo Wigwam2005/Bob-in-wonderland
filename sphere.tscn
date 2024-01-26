@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://vxyjnroxx2h"]
+
+[ext_resource type="Script" path="res://sphere.gd" id="1_efton"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_c8p0k"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6q0g3"]
+
+[node name="sphere" type="Node3D"]
+script = ExtResource("1_efton")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_c8p0k")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
+shape = SubResource("SphereShape3D_6q0g3")
+
+[connection signal="input_event" from="MeshInstance3D/Area3D" to="." method="_on_area_3d_input_event"]
