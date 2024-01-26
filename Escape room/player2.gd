@@ -6,7 +6,6 @@ var current_speed = 5.0
 const walk_speed = 5.0
 const crouch_speed = 3.0
 const jump_velocity = 4.5
-
 const mouse_sens = 0.001
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -20,11 +19,13 @@ func _input(event):
 		rotate_y(-event.relative.x * mouse_sens)
 		head.rotate_x(-event.relative.y * mouse_sens)
 
+
 func _physics_process(delta):
 	if Input.is_action_pressed("crouch"):
 		current_speed = crouch_speed
 	else:
 		current_speed = walk_speed
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -45,5 +46,6 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, current_speed)
 
 	move_and_slide()
+
 	if Input.is_action_just_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE) 
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
